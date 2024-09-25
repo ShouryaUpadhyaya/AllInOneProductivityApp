@@ -1,6 +1,6 @@
 import React from "react";
-import ToDoList from "./ToDoList";
 import HabitTracker from "./HabitTracker";
+import ToDoList from "./ToDoList";
 import DayReview from "./DayReview";
 import HealthBar from "./HealthBar";
 

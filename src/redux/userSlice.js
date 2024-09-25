@@ -13,8 +13,11 @@ const userSlice = createSlice({
     increaseLevel: (state) => {
       state.level += 1;
     },
+    reSetHealth: (state) => {
+      state.health = 0;
+    },
   },
 });
 
-export const { increaseHealth, increaseLevel } = userSlice.actions;
+export const { increaseHealth, increaseLevel, reSetHealth } = userSlice.actions;
 export default userSlice.reducer;

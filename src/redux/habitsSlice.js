@@ -1,18 +1,38 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  habitData: {}, // Stores habits by date
+};
+
 const habitsSlice = createSlice({
   name: "habits",
-  initialState: [],
+  initialState,
   reducers: {
     addHabit: (state, action) => {
-      state.push(action.payload);
+      const { date, habit } = action.payload;
+      if (!state.habitData[date]) {
+        state.habitData[date] = [];
+      }
+      state.habitData[date].push(habit);
+    },
+    removeHabit: (state, action) => {
+      const { date, habitId } = action.payload;
+      if (state.habitData[date]) {
+        state.habitData[date] = state.habitData[date].filter(
+          (habit) => habit.id !== habitId
+        );
+      }
     },
     completeHabit: (state, action) => {
-      const habit = state.find((habit) => habit.id === action.payload);
-      if (habit) habit.completed = true;
+      const { date, habitId } = action.payload;
+      const habitsForDate = state.habitData[date];
+      const habit = habitsForDate.find((habit) => habit.id === habitId);
+      if (habit) {
+        habit.completed = true;
+      }
     },
   },
 });
 
-export const { addHabit, completeHabit } = habitsSlice.actions;
+export const { addHabit, removeHabit, completeHabit } = habitsSlice.actions;
 export default habitsSlice.reducer;

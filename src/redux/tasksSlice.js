@@ -10,6 +10,7 @@ const tasksSlice = createSlice({
     completeTask: (state, action) => {
       const task = state.find((task) => task.id === action.payload);
       if (task) task.completed = true;
+      else task.completed = false;
     },
   },
 });
