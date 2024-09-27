@@ -16,8 +16,12 @@ const userSlice = createSlice({
     reSetHealth: (state) => {
       state.health = 0;
     },
+    setLevel: (state, action) => {
+      state.level = action.payload;
+    },
   },
 });
 
-export const { increaseHealth, increaseLevel, reSetHealth } = userSlice.actions;
+export const { increaseHealth, increaseLevel, reSetHealth, setLevel } =
+  userSlice.actions;
 export default userSlice.reducer;

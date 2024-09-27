@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addHabit, removeHabit, completeHabit } from "../redux/habitsSlice";
 import { increaseHealth } from "../redux/userSlice";
+import { increaseLevel, reSetHealth } from "../redux/userSlice";
 
 const HabitTracker = () => {
   const dispatch = useDispatch();
@@ -10,7 +11,8 @@ const HabitTracker = () => {
   const [difficulty, setDifficulty] = useState("easy");
   const [selectedDate, setSelectedDate] = useState(
     new Date().toISOString().split("T")[0]
-  ); // Default to today
+  );
+  const user = useSelector((state) => state.user);
 
   const habitsForSelectedDate = habitData[selectedDate] || [];
 
@@ -33,7 +35,10 @@ const HabitTracker = () => {
 
   const handleCompleteHabit = (habitId, habitDifficulty) => {
     dispatch(completeHabit({ date: selectedDate, habitId }));
-
+    if (user.health > 90) {
+      dispatch(reSetHealth());
+      dispatch(increaseLevel());
+    }
     const healthIncrease =
       habitDifficulty === "easy" ? 5 : habitDifficulty === "medium" ? 10 : 15;
     dispatch(increaseHealth(healthIncrease));

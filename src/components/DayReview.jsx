@@ -11,7 +11,7 @@ const DayReview = () => {
   console.log(state);
   const handleSubmit = () => {
     if (review.trim()) {
-      const today = format(new Date(), "yyyy-MM-dd");
+      const today = format(new Date(), "dd-MM-yyyy");
       dispatch(addDayReview({ date: today, review }));
       setReview("");
     }
@@ -19,7 +19,7 @@ const DayReview = () => {
 
   return (
     <div className="p-4 bg-gray-100 shadow rounded-lg  mx-auto">
-      <h2 className="text-xl font-semibold mb-4">Day Review</h2>
+      <h2 className="text-2xl font-bold mb-4">Day Review</h2>
 
       <textarea
         className="w-full p-2 border rounded-lg mb-4 text-gray-700"

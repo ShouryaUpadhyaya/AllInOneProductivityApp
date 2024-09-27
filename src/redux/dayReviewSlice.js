@@ -4,6 +4,9 @@ const dayReviewSlice = createSlice({
   name: "dayReview",
   initialState: [],
   reducers: {
+    removeDayReview: (state, action) => {
+      return state.filter((task) => task.id !== action.payload);
+    },
     addDayReview: (state, action) => {
       state.push({
         date: action.payload.date,
@@ -13,5 +16,5 @@ const dayReviewSlice = createSlice({
   },
 });
 
-export const { addDayReview } = dayReviewSlice.actions;
+export const { addDayReview, removeDayReview } = dayReviewSlice.actions;
 export default dayReviewSlice.reducer;
